@@ -9,9 +9,9 @@ export default function Admin() {
 
     //Example data format:
     const test = [
-        { name: "Joe Smith", expertise: "Math", rating: 3},
-        { name: "Megan Celica", expertise: "Biology", rating: 4},
-        { name: "Bob Celica", expertise: "English", rating: 5}
+        { song: "Super Shy", artist: "NewJeans", length: "2:34", date: "7/7/2023", genre: "K-Pop", album: "Get Up"},
+        { name: "Megan Celica", song: "Biology", artist: 4},
+        { name: "Bob Celica", song: "English", artist: 5}
     ];
 
 
@@ -33,16 +33,28 @@ export default function Admin() {
     const columns = useMemo(
         () => [
             {
-                Header: 'Name',
-                accessor: 'name'
-            },
-            {
                 Header: 'Song',
-                accessor: 'expertise'
+                accessor: 'song',
             },
             {
-                Header: 'Rating',
-                accessor: 'rating'
+                Header: 'Artist',
+                accessor: 'artist'
+            },
+            {
+                Header: 'Length',
+                accessor: 'length'
+            },
+            {
+                Header: 'Release Date',
+                accessor: 'date'
+            },
+            {
+                Header: 'Genre',
+                accessor: 'genre'
+            },
+            {
+                Header: 'Album',
+                accessor: 'album'
             },
             {
                 accessor:'request',
@@ -62,7 +74,7 @@ export default function Admin() {
     return (
         <>
             <div>
-                <DataTable data={test} columns={columns}/>
+                <DataTable id='table' data={test} columns={columns}/>
             </div>
         </>
     )

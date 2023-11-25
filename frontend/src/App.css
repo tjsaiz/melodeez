@@ -20,10 +20,10 @@ body {
   justify-content: center;
   align-items: stretch;
   gap: 50rem;
-  padding: 0 9rem;
+  padding: 0 5rem;
   height: 4rem;
   font-weight: bold;
-  border-radius: 0 0 215px 215px;
+  border-radius: 215px 215px 215px 215px;
   font-size: large;
 
 }
@@ -42,7 +42,7 @@ body {
   height: 100%;
   display: flex;
   align-items: center;
-  padding: .25rem;
+  padding: 0 1rem;
 }
 
 .nav li.active {
@@ -57,4 +57,14 @@ body {
   font-weight: bold;
   font-size: large;
 
+}
+
+table {
+  padding: 10px;
+}
+
+.logo {
+  height: 100px;
+  width: 100px;
+  margin-top: 10px;
 }

@@ -1,15 +1,16 @@
 import {useState} from "react";
-import logo from "../../../resources/Tlogo.png";
 
-export default function Home() {
+export default function Share() {
     const [count, setCount] = useState(0)
 
 
     return (
         <>
-        <img className='logo' src={logo} alt="logo"/>
-        <h1>Home</h1>
+        <h1>Share</h1>
         <div className="card">
+            <button onClick={() => setCount((count) => count + 1)}>
+                count is {count}
+            </button>
             <p>
                 Edit <code>src/App.jsx</code> and save to test HMR
             </p>
