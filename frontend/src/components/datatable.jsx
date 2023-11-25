@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import { useTable, useFilters, useGlobalFilter } from 'react-table';
-import TextField from '@mui/material/TextField';
-import '../../Styles/datatable.css';
+//import TextField from '@mui/material/TextField';
+import '../Styles/datatable.css';
 
 function DataTable({data, columns, enableSearchBar=false}) {
     const [filterInput, setFilterInput] = useState('');
@@ -27,8 +27,10 @@ function DataTable({data, columns, enableSearchBar=false}) {
     return(
         <div>
 
-            {enableSearchBar ? <TextField value={filterInput} onChange={handleFilterChange} placeholder="Search" />
-                : <></>}
+            {
+                //FILTERS STUFF HERE?
+                //enableSearchBar ? <TextField value={filterInput} onChange={handleFilterChange} placeholder="Search" />: <></>
+            }
             <table {...getTableProps()}>
                 <thead>
                 {headerGroups.map(headerGroup => (

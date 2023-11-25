@@ -17,10 +17,12 @@ const db = require('./db.jsx');
 // delete songs
 // edit songs
 
-async function insert(item){
-    const insertQuery = `INSERT ... FROM ...`
+async function addSong(item){
+
+    // item.songName, item.artistName, item.length, item.genre, item.album,
     const result = await db.run(
-        insertQuery ,
+        `INSERT INTO songs(songName, artistName, length, genre, album) 
+             VALUES (${item.songName}, ${item.artistName}, ${item.length}, ${item.genre}, ${item.album})` ,
         (err,res)=>
         {
         if(err){
@@ -28,6 +30,7 @@ async function insert(item){
         }
     return res;
     });
+
 }
 
 async function getMusicList(){
@@ -43,5 +46,11 @@ async function getMusicList(){
 }
 
 module.exports = {
-    getMusicList
+    getMusicList,
+    addSong,
+    // deleteSong,
+    // updateSong,
+    // addSongToPlaylist,
+    // deleteSongFromPlaylist,
+
 }

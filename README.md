@@ -2,10 +2,10 @@
 ## Application user interface for music library <br>
 ### Requires node.js and npm to run <br>
 ### Instructions to run the application :
-#### 1. Install packages by either running the install.bat scripted located in the root diretory  <br> 
+#### 1. Install packages by either running the install.bat script located in the root directory  <br> 
 #### or <br> 
 #### run the following commands in a command prompt<br><br>
-Open command prompt inside the root directory<br>
+> Open command prompt inside the root directory<br>
 > ```cd ./frontend ``` // locate frontend directory<br>
 > ```npm install ``` <br>
 > ```cd ../backend ``` // locate backend directory<br>
