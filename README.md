@@ -19,22 +19,10 @@
 ---
 
 ### If ports needed to be changed
-##### For frontend:
-- Locate vite.config.js in frontend directory
-- Find this config inside
+- Locate "ports.js" in the backend folder
+- Change the port numbers
 
-       export default defineConfig({
-            plugins: [react()],
-            server: {
-            port: 5555,
-            }
-       })
-- Change the port to any desired port
-### For backend:
-- Locate index.js in backend directory 
-- Find the PORT variable: ```const PORT = 8000```
-- Replace the PORT variable to any desired port
-
-
+      export const backPort = 8000;
+      export const frontPort = 5173;
 ---
 
