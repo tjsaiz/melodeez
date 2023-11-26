@@ -11,7 +11,6 @@ export default function Admin() {
     const [data,setData] = useState([]);
     const [fetchList, setFetchList] = useState(false);
 
-    //Example data format:
     // const test = [
     //     { name: "Joe Smith", expertise: "Math", rating: 3},
     //     { name: "Megan Celica", expertise: "Biology", rating: 4},
@@ -25,7 +24,6 @@ export default function Admin() {
         })
 
     }
-
 
     // Get API request using axios
     // Data received must be json format
