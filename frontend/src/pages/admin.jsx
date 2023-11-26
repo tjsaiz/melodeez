@@ -1,31 +1,32 @@
 import DataTable from "../components/datatable.jsx";
-import {useMemo, useState,useEffect} from "react";
-//import Axios from "axios";
+import {useEffect, useMemo, useState} from "react";
+import {backPort} from '../../../backend/ports.js'
+import Axios from "axios";
+import {useNavigate} from "react-router-dom";
+
 export default function Admin() {
-    // const port = require('./ports');
-    // const API = `localhost:${port} `
+    const getMusicListAPI = `http://localhost:${backPort}/api/musicList`
+    const deleteSongAPI = `http://localhost:${backPort}/api/remove/`
+    let requestBody = {};
+    const [data,setData] = useState([]);
+    const [fetchList, setFetchList] = useState(false);
 
-    const API = `localhost:8000/musicList`
+    // const test = [
+    //     { name: "Joe Smith", expertise: "Math", rating: 3},
+    //     { name: "Megan Celica", expertise: "Biology", rating: 4},
+    //     { name: "Bob Celica", expertise: "English", rating: 5}
+    // ];
+    let handleDelete = (id) => {
+        Axios.delete(deleteSongAPI + id)
+            .then(() =>{ })
+            .catch(()=>{
+            console.log("Error");
+        })
 
-    //Example data format:
-    const test = [
-        { song: "Super Shy", artist: "NewJeans", length: "2:34", date: "7/7/2023", genre: "K-Pop", album: "Get Up"},
-        { name: "Megan Celica", song: "Biology", artist: 4},
-        { name: "Bob Celica", song: "English", artist: 5}
-    ];
-
+    }
 
     // Get API request using axios
     // Data received must be json format
-    // let requestBody = {};
-    // const [data,setData] = useState([]);
-    // useEffect(() =>  {
-    //     (async () => {
-    //         Axios.post(URL,requestBody).then((response) => {
-    //             setData(response.data);
-    //         });
-    //     })();
-    // }, []);
 
     //Create columns and display
     //Header = Display header name of column
@@ -33,20 +34,24 @@ export default function Admin() {
     const columns = useMemo(
         () => [
             {
-                Header: 'Song',
-                accessor: 'song',
+                Header: 'ID',
+                accessor: 'song_id'
+            },
+            {
+                Header: 'Song name',
+                accessor: 'songName'
             },
             {
                 Header: 'Artist',
-                accessor: 'artist'
+                accessor: 'artistName'
             },
             {
                 Header: 'Length',
                 accessor: 'length'
             },
             {
-                Header: 'Release Date',
-                accessor: 'date'
+                Header: 'Date Published',
+                accessor: 'createdDate'
             },
             {
                 Header: 'Genre',
@@ -62,6 +67,8 @@ export default function Admin() {
                     (
                         <button onClick={(e) => {
                             e.preventDefault();
+                            handleDelete(row.original.song_id)
+                            setFetchList(!fetchList)
                         }}>
                             Remove
                         </button>),
@@ -70,11 +77,19 @@ export default function Admin() {
         []
     );
 
+    useEffect( () => {
+            Axios.get(getMusicListAPI, requestBody).then((response) => {
+                setFetchList(false);
+                console.log(response.data);
+                setData(response.data);
+            })
+    }, [fetchList]);
+
     //Create datatable using <Datatable data={data goes here} columns={columns} />
     return (
         <>
             <div>
-                <DataTable id='table' data={test} columns={columns}/>
+                <DataTable data={data} columns={columns}/>
             </div>
         </>
     )
