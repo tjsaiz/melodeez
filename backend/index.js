@@ -1,12 +1,12 @@
 import {backPort} from './ports.js'
 import express from "express";
-import {db} from "./db.js";
 import cors from 'cors';
 import {getPlaylist} from "./queries/getPlaylist.js";
 import {getMusicList} from "./queries/getMusicList.js";
 import {addSong} from "./queries/addSong.js";
 import {deleteSong} from "./queries/deleteSong.js"
-import {addToPlaylist} from "./queries/editPlaylist.js";
+import {editPlaylist} from "./queries/editPlaylist.js";
+import {updateSong} from "./queries/updateSong.js";
 
 // Create express app
 const app = express()
@@ -38,15 +38,8 @@ app.delete("/api/remove/:id", (req,res)=>{
 });
 
 //Change song description/information in the music library
-app.patch("/api/updateSong/:id", (req,res) => {
-    const updateQuery = `UPDATE ... FROM ... `
-    db.run(
-        updateQuery, (err,res)=>{
-        if(err){
-            return console.log(err.message);
-        }
-
-    });
+app.patch("/api/updateSong/", (req,res) => {
+    updateSong(req,res);
 });
 
 //Get Playlist
@@ -55,9 +48,10 @@ app.get("/api/getPlaylist", (req,res,next) =>
     getPlaylist(req,res);
 });
 
-app.patch("/api/addToPlaylist/:id", (req,res,next) =>
+//Add or remove songs from playlist
+app.patch("/api/editPlaylist", (req,res,next) =>
 {
-    addToPlaylist(req,res);
+    editPlaylist(req,res);
 });
 
 

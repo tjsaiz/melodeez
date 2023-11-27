@@ -9,6 +9,19 @@ export default function Edit() {
     let requestBody = {};
     const [data,setData] = useState([]);
     const [fetchList, setFetchList] = useState(false);
+    let handleEditP = (id,pCheck) => {
+        let editPlaylistBody = {
+            id: id,
+            playlist: pCheck
+        }
+        Axios.patch(getPlaylistAPI,editPlaylistBody)
+            .then(() =>{ })
+            .catch(()=>{
+                console.log("Error");
+            })
+
+    }
+
 
     const columns = useMemo(
         () => [
@@ -41,7 +54,7 @@ export default function Edit() {
                 Cell: ({row}) =>
                     (
                         <div>
-                            {row.original.added_to_playlist ? "Not in Playlist" : "In Playlist"}
+                            {row.original.added_to_playlist == "FALSE" ? "Not in Playlist" : "In Playlist"}
                         </div>),
             },
             {
@@ -49,28 +62,15 @@ export default function Edit() {
                 Cell: ({row}) =>
                     (
                         <>
-                        {row.original.added_to_playlist ?
-                                <>
-                                    <button onClick={(e) => {
-                                    e.preventDefault();
-                                    //handleAddToP(row.original.song_id)
-                                    setFetchList(!fetchList)
-                                    }}>
-                                        Add
-                                    </button>
-                                </>
-                                :
-                                <>
-                                    <button onClick={(e) => {
-                                    e.preventDefault();
-                                    //handleRemoveFromP(row.original.song_id)
-                                    setFetchList(!fetchList)
-                                    }}>
-                                        Remove
-                                    </button>
-                                </>
-                        }
-                    </>
+                            <button onClick={(e) => {
+                                e.preventDefault();
+                                handleEditP(row.original.song_id,row.original.added_to_playlist.toUpperCase())
+                                setFetchList(!fetchList)
+                                console.log(row.original.added_to_playlist);
+                            }}>
+                                {row.original.added_to_playlist == "FALSE" ? "Add ": "Remove"}
+                            </button>
+                        </>
                     ),
             },
         ],
