@@ -1,0 +1,32 @@
+
+SELECT *
+FROM songs;
+
+-- Test 5 queries to check if database is working as expected
+-- Retrieve all songs by a specific artist:
+SELECT *
+FROM songs
+WHERE artistName = 'Eminem';
+
+-- Find the total number of songs in a particular genre:
+SELECT genre, COUNT(*) as songCount 
+FROM songs
+GROUP BY genre;
+
+-- List all songs released after a certain date:
+SELECT * 
+FROM songs
+WHERE createdDate > '2010';
+
+-- Get the total length of songs in each genre:
+Select genre, SUM(length) as totalLength 
+FROM songs
+GROUP BY genre;
+
+-- Find songs with the same name, but with different artist names
+SELECT songName, artistName
+FROM songs as s1
+WHERE (
+    SELECT COUNT(DISTINCT artistName)
+    FROM songs as s2
+    WHERE s2.songName = s1.songName) > 1;
