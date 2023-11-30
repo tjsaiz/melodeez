@@ -8,6 +8,6 @@ export const deleteSong = (req,res) => {
             if (err) {
                 throw err;
             }
-
+            res.send()
         });
 }

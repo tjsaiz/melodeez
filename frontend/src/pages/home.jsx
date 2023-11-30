@@ -9,11 +9,6 @@ export default function Home() {
         <>
         <img className='logo' src={logo} alt="logo"/>
         <h1>Home</h1>
-        <div className="card">
-            <p>
-                Edit <code>src/App.jsx</code> and save to test HMR
-            </p>
-        </div>
         </>
     )
 }

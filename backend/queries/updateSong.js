@@ -1,9 +1,8 @@
 import {db} from "../db.js";
 
 export const updateSong = (req,res) => {
-    console.log(req.body)
+    const id = req.params.id;
     let songBody = req.body;
-    //Add to playlist
     db.run(`
         UPDATE songs 
         SET songName = '${songBody.songName}', 
@@ -12,7 +11,7 @@ export const updateSong = (req,res) => {
             createdDate='${songBody.createdDate}', 
             genre='${songBody.genre}', 
             album='${songBody.album}'
-        WHERE song_id = "${songBody.song_id}"`,
+        WHERE song_id = "${id}"`,
         (err,row) => {
         if (err) {
             console.log(err.message);

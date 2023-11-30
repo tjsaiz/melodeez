@@ -38,7 +38,7 @@ app.delete("/api/remove/:id", (req,res)=>{
 });
 
 //Change song description/information in the music library
-app.patch("/api/updateSong/", (req,res) => {
+app.patch("/api/updateSong/:id", (req,res) => {
     updateSong(req,res);
 });
 

@@ -1,13 +1,11 @@
 import {db} from '../db.js'
 
 export const addSong = (req,res) => {
-    // item.songName, item.artistName, item.length, item.genre, item.album,
-    // Needs to get json body here
 
     let songBody = req.body;
     if (Object.keys(req.body).length === 0){
         console.log({"Error": "Input is empty or undefined"})
-        res.send("TEST");
+        res.send();
     }
     else {
         db.run(
@@ -16,7 +14,6 @@ export const addSong = (req,res) => {
             (err, row) => {
                 if (err) {
                     console.log(err.message);
-                    return;
                 }
             });
         res.send();
