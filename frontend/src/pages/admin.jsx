@@ -163,6 +163,7 @@ export default function Admin() {
                                 e.preventDefault();
                                 handleDelete(row.original.song_id)
                                 //setFetchList(!fetchList)
+                                navigate(0);
                             }}>
                                 Remove
                             </button>
