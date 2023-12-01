@@ -5,22 +5,8 @@ import {backPort} from "../../../backend/ports.js";
 
 export default function Share() {
     const getMusicListAPI = `http://localhost:${backPort}/api/getPlaylist`
-    const getPlaylistAPI = `http://localhost:${backPort}/api/editPlaylist/`
     let requestBody = {};
     const [data,setData] = useState([]);
-    const [fetchList, setFetchList] = useState(false);
-    let handleEditP = (id,pCheck) => {
-        let editPlaylistBody = {
-            id: id,
-            playlist: pCheck
-        }
-        Axios.patch(getPlaylistAPI,editPlaylistBody)
-            .then(() =>{ })
-            .catch(()=>{
-                console.log("Error");
-            })
-
-    }
 
     const columns = useMemo(
         () => [
@@ -48,18 +34,6 @@ export default function Share() {
                 Header: 'Album',
                 accessor: 'album'
             },
-            {
-                accessor:'request',
-                Cell: ({row}) =>
-                    (
-                        <button onClick={(e) => {
-                            e.preventDefault();
-                            handleEditP(row.original.song_id,row.original.added_to_playlist.toUpperCase())
-                            setFetchList(!fetchList)
-                        }}>
-                            Remove
-                        </button>),
-            },
         ],
         []
     );
@@ -68,11 +42,9 @@ export default function Share() {
 
     useEffect( () => {
         Axios.get(getMusicListAPI, requestBody).then((response) => {
-            setFetchList(false);
-            console.log(response.data);
             setData(response.data);
         })
-    }, [fetchList]);
+    }, []);
     return (
         <>
         <h1>Share</h1>
